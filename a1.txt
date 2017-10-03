@@ -1,0 +1,29 @@
+1a.
+We would need to consider a tie-resolution scheme for k-NN in the scenario where...
+	1. k>1
+	2. AND...
+		2a. k is an even number. 
+		2b. OR the number of potential classes is equal to k
+	
+	# In more readable terms...
+	if(k > 1):
+		if(k%2 == 0):
+			# Use decision rule
+		else if(num_potential_classes == k):
+			# Use decision rule
+	else:
+		# Don't use decision rule
+		
+
+The decision rule of k-NN is essentially to poll the k nearest neighbors and classify the test sample as whatever is the most popular class in the k nearest neighbours. Therefore, if we find k nearest neighbors, where the probability of the test sample being of class C[i] is the same as class C[j], then we need a tie-breaking schema. The above pseudocode should identify situations where a tie-breaker would be possible, and therefore a tie-breaking schema necessary.
+
+Ex: We have a test sample X, and it's 1 nearest neighbor is of class C. There is no possibility of a tie, since there is only one possible class.
+
+Ex: We have a test sample X, and it's 4 nearest neighbors are split between classes A and B. Since each class has a 0.50% probability of being selected, we need a tie-resolution schema.
+Ex: We have a test sample X, and it's 3 nearest neighbors are of all different classes. Since each class has a 0.33% probability of being selected, we need a tie-resolution schema.
+
+
+2.
+Cross validation is a method of choosing the best model to represent your data. Typically, you would split your dataset between testing, training, and validation sets. For this explanation, we'll consider only test and training sets. Now, if you split your dataset between training and test data (70-30 split, respectively), you want to make sure that the 70% subset of your dataset that you've chosen to train your model is the 70% of the dataset that will lead to best representing the test set (and hopefully new samples in the future). 
+
+Using 10-fold validation, you split your dataset into 10 parts. 7 parts training set, 3 parts test set perhaps. Then, you go through all the different combinations of training set parts and test set parts to determine which 7 parts of your dataset will create the best model to classify the 3 parts of the test set. You would use an evaluation metric to determine how incorrect your classification was, for each combination, and choose the combination which lead to the fewest errors to base your model on.

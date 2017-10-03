@@ -1,0 +1,24 @@
+1
+	a.  - Verify and fix what would cause a need for a tie resolution scheme
+	b.  - Impliment naive bayes
+	c.	- Take screenshots of plots before and after classification on all datasets.
+
+2
+	- Impliment 10-fold cross validation
+	- Talk about the 5 measures of efficiency
+	- Verify paragraph about how cross validation works
+
+3
+	- Fetch results of classifiers for each dataset
+
+4
+	- Find the best value of k for k-NN.
+	- Compare results with 1-NN and naive bayes
+	- What is the best value of k for each dataset?
+
+5
+	- Reference pics from part 1
+
+6
+	- Talk about the behaviour of each classifier.
+	- Talk about which classifier is best for each DS

@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import numpy as np
 
-# Plot the points onto a graph. Rather, onto 2 graphs (one for uniform weights, and another for distance weights).
-# Not sure the difference to be honest, but I'd rather keep the example as is just in case.
+
+# Plot the points onto a graph.
 #
 # Set the $colored parameter to False if you want a black and white graph (effectively plotting before classification)
 # Source:
@@ -20,9 +20,10 @@ def plotGrid(classifier, x, y, n_neighbors=1, colored=True):
         cmap_light = ListedColormap([])
         cmap_bold = ListedColormap([])
 
-
-    # Plotting once for uniform weights, and another for distance
-    for weights in ['uniform', 'distance']:
+    # Plotting once for uniform weights.
+    # Original example had plotting example for uniform and distance weights,
+    # but I'd say it's outside of the current scope of requirements.
+    for weights in ['uniform']:
         # Plot the decision boundary. For that, we will assign a color to each
         # point in the mesh [x_min, x_max]x[y_min, y_max].
         x_min, x_max = x.loc[:, 0].min() - 1, x.loc[:, 0].max() + 1

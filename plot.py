@@ -3,12 +3,10 @@ from matplotlib.colors import ListedColormap
 import numpy as np
 
 
-# Plot the points onto a graph.
-#
 # Set the $colored parameter to False if you want a black and white graph (effectively plotting before classification)
 # Source:
 # http://scikit-learn.org/stable/auto_examples/svm/plot_iris.html
-def plotGrid(classifier, x, y, n_neighbors=1, colored=True):
+def plotGrid(classifier, x, y, dataset_name, n_neighbors=1, colored=True):
     h = .02  # step size in the mesh
 
     # Create color maps if the user wishes
@@ -44,3 +42,4 @@ def plotGrid(classifier, x, y, n_neighbors=1, colored=True):
         plt.ylim(yy.min(), yy.max())
         plt.title("3-Class classification (k = %i, weights = '%s')"
                   % (n_neighbors, weights))
+        plt.suptitle("Dataset = '%s'" % (dataset_name))

@@ -16,9 +16,9 @@ n_neighbors = 1
 
 # Loading dataset
 dataset_files = [
-    # "datasets/clusterincluster.csv",
-    # "datasets/halfkernel.csv",
-    # "datasets/twogaussians.csv",
+    #"datasets/clusterincluster.csv",
+    #"datasets/halfkernel.csv",
+    #"datasets/twogaussians.csv",
     "datasets/twospirals.csv"
 ]
 
@@ -45,8 +45,8 @@ def main():
         clf.fit(xTrain, yTrain)
 
         # Plot twice; Once without color (ie: "unclassified" values), and once with color
-        plotGrid(clf, x, y, 1, colored=False)
-        plotGrid(clf, x, y, 1)
+        #plotGrid(clf, x, y, ds_file, 1, colored=False)
+        plotGrid(clf, x, y, ds_file, 1)
 
         # Evaluating the best model via 10-fold cross validation
         # kf = KFold(n_splits=10)

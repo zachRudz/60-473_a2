@@ -10,6 +10,8 @@ from crossValidation import cross_validate
 # Variables
 #
 ################################################################################
+from plot import plotGrid
+
 test_size = 0.33
 knn_distance_function = 'euclidean'  # Equivalent to p=2, according to the documentation
 n_neighbors = 1
@@ -61,5 +63,5 @@ def classify(cross_validation=True):
 
         # Plot twice; Once without color (ie: "unclassified" values), and once with color
         # plotGrid(clf, x, y, ds_file, 1, colored=False)
-        # plotGrid(clf, x, y, ds_file, 1)
+        plotGrid(clf, x, y, ds_file, 1)
         print("Dataset: {}\tScore: {}".format(ds_file, score))

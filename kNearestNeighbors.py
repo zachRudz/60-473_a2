@@ -5,6 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split, KFold
 
 from crossValidation import cross_validate
+from plot import plotGrid
 
 ################################################################################
 #
@@ -29,7 +30,7 @@ dataset_files = [
 # Entry Point
 #
 ################################################################################
-def fitModel(n_neighbors, xTrain, yTrain):
+def fitModel(xTrain, yTrain, n_neighbors=1):
     clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights='uniform', algorithm='auto',
                                metric=knn_distance_function)
     clf.fit(xTrain, yTrain)
@@ -52,7 +53,7 @@ def classify(cross_validation=True):
             xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size=test_size)
 
             # Fitting our model
-            clf = fitModel(1, xTrain, yTrain)
+            clf = fitModel(xTrain, yTrain, n_neighbors=1)
             score = clf.score(xTest, yTest)
 
 
@@ -61,7 +62,7 @@ def classify(cross_validation=True):
 
         # Plot twice; Once without color (ie: "unclassified" values), and once with color
         #plotGrid(clf, x, y, ds_file, 1, colored=False)
-        #plotGrid(clf, x, y, ds_file, 1)
+        plotGrid(clf, x, y, ds_file, 1)
 
         # Printing results
         print("Dataset: {}\tScore: {}".format(ds_file, score))

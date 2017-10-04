@@ -4,12 +4,12 @@
 	c.	x Take screenshots of plots before and after classification on all datasets.
 
 2
-	- Impliment 10-fold cross validation
+	x Impliment 10-fold cross validation
 	- Talk about the 5 measures of efficiency
 	x Verify paragraph about how cross validation works
 
 3
-	- Fetch results of classifiers for each dataset
+	x Fetch results of classifiers for each dataset
 
 4
 	- Find the best value of k for k-NN.

@@ -43,3 +43,4 @@ def plotGrid(classifier, x, y, dataset_name, n_neighbors=1, colored=True):
         plt.title("2-Class classification (k = %i, weights = '%s')"
                   % (n_neighbors, weights))
         plt.suptitle("Dataset = '%s'" % (dataset_name))
+

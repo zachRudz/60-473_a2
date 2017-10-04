@@ -35,3 +35,16 @@ score = clf.score(xTest, yTest)
 Cross validation is a method of choosing the best model to represent your data. Typically, you would split your dataset between testing, training, and validation sets. For this explanation, we'll consider only test and training sets. Now, if you split your dataset between training and test data (70-30 split, respectively), you want to make sure that the 70% subset of your dataset that you've chosen to train your model is the 70% of the dataset that will lead to best representing the test set (and hopefully new samples in the future). In other words, it helps to avoid the bias of the test set bleeding into the model.
 
 Using 10-fold validation, you split your dataset into 10 parts. 7 parts training set, 3 parts test set perhaps. Then, you go through all the different combinations of training set parts and test set parts to determine which 7 parts of your dataset will create the best model to classify the 3 parts of the test set. You would use an evaluation metric to determine how incorrect your classification was, for each combination, and choose the combination which lead to the fewest errors to base your model on.
+
+3.
+-- K-nearest Neighbors, 10-fold cross validation --
+Dataset: datasets/clusterincluster.csv	Score: 1.0
+Dataset: datasets/halfkernel.csv	Score: 1.0
+Dataset: datasets/twogaussians.csv	Score: 1.0
+Dataset: datasets/twospirals.csv	Score: 0.95
+
+-- Naive Bayes, 10-fold cross validation --
+Dataset: datasets/clusterincluster.csv	Score: 1.0
+Dataset: datasets/halfkernel.csv	Score: 0.97
+Dataset: datasets/twogaussians.csv	Score: 1.0
+Dataset: datasets/twospirals.csv	Score: 0.67

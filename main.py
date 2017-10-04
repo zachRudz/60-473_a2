@@ -10,12 +10,11 @@ def main():
         print("1. K-Nearest Neighbors")
         print("2. Naive Bayes")
         classifier = input("What classifier do you want to try? ")
-        classifier = int(classifier)
 
         # Parsing decision
-        if classifier == 0:
+        if classifier == "0":
             quit(0)
-        elif classifier not in [1, 2]:
+        elif classifier not in ["1", "2"]:
             print("Not a valid input. Exiting...")
             break
 
@@ -25,22 +24,21 @@ def main():
         print("1. Yes")
         print("2. No")
         cvDecision = input("What do you want to do? ")
-        cvDecision = int(cvDecision)
 
         # Parsing cvDecision
-        if cvDecision == 0:
+        if cvDecision == "0":
             quit(0)
-        elif cvDecision not in [1, 2]:
+        elif cvDecision not in ["1", "2"]:
             print("Not a valid input. Exiting...")
             break
-        cross_validation = cvDecision == 1
+        cross_validation = cvDecision == "1"
 
         # -- Starting classifier --
-        if classifier == 0:
+        if classifier == "0":
             quit(0)
-        if classifier == 1:
+        if classifier == "1":
             kNearestNeighbors.classify(cross_validation=cross_validation)
-        elif classifier == 2:
+        elif classifier == "2":
             # -- Naive bayes --
             naiveBayes.classify(cross_validation=cross_validation)
 

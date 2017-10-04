@@ -1,10 +1,9 @@
 # Used for importing dataset
 import pandas as pd
-
-from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
-from plot import plotGrid
-from sklearn.model_selection import KFold
+from sklearn.naive_bayes import GaussianNB
+
+from crossValidation import cross_validate
 
 ################################################################################
 #
@@ -35,6 +34,7 @@ def fitModel(xTrain, yTrain):
     clf.fit(xTrain, yTrain)
     return clf
 
+
 def classify(cross_validation=True):
     print("-- Naive Bayes --")
     for ds_file in dataset_files:
@@ -45,30 +45,21 @@ def classify(cross_validation=True):
 
         # When building our model, should we use cross validation, or just split the data?
         if cross_validation:
-            # Evaluating the best model via 10-fold cross validation
-            kf = KFold(n_splits=10)
-
-            for train_index, test_index in kf.split(x):
-                xTrain, xTest = x.loc[train_index], x.loc[test_index]
-                yTrain, yTest = y.loc[train_index], y.loc[test_index]
-                clf = fitModel(xTrain, yTrain)
-
-                score = clf.score(xTest, yTest)
+            clf, score, xTrain, xTest, yTrain, yTest = cross_validate(fitModel, x, y)
 
         else:
             # No cross validation
             # Splitting into test/train sets
             xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size=test_size)
             clf = fitModel(xTrain, yTrain)
+
+            # Printing results
             score = clf.score(xTest, yTest)
 
         # Making predictions on the test set
         # y_pred = clf.predict(xTest)
 
-
         # Plot twice; Once without color (ie: "unclassified" values), and once with color
         # plotGrid(clf, x, y, ds_file, 1, colored=False)
         # plotGrid(clf, x, y, ds_file, 1)
-
-        # Printing results
         print("Dataset: {}\tScore: {}".format(ds_file, score))

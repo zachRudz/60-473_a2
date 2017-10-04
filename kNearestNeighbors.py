@@ -3,7 +3,8 @@ import pandas as pd
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split, KFold
-from plot import plotGrid
+
+from crossValidation import cross_validate
 
 ################################################################################
 #
@@ -44,17 +45,7 @@ def classify(cross_validation=True):
 
         # When building our model, should we use cross validation, or just split the data?
         if cross_validation:
-            # Evaluating the best model via 10-fold cross validation
-            kf = KFold(n_splits=10)
-
-            for train_index, test_index in kf.split(x):
-                xTrain, xTest = x.loc[train_index], x.loc[test_index]
-                yTrain, yTest = y.loc[train_index], y.loc[test_index]
-                clf = fitModel(1, xTrain, yTrain)
-                score = clf.score(xTest, yTest)
-
-                # Printing results
-                print("Dataset: {}\tScore: {}".format(ds_file, score))
+            clf, score, xTrain, xTest, yTrain, yTest = cross_validate(fitModel, x, y)
 
         else:
             # Splitting into test/train sets
@@ -64,8 +55,6 @@ def classify(cross_validation=True):
             clf = fitModel(1, xTrain, yTrain)
             score = clf.score(xTest, yTest)
 
-            # Printing results
-            print("Dataset: {}\tScore: {}".format(ds_file, score))
 
             # Making predictions on the test set
             #y_pred = clf.predict(xTest)
@@ -74,3 +63,5 @@ def classify(cross_validation=True):
         #plotGrid(clf, x, y, ds_file, 1, colored=False)
         #plotGrid(clf, x, y, ds_file, 1)
 
+        # Printing results
+        print("Dataset: {}\tScore: {}".format(ds_file, score))

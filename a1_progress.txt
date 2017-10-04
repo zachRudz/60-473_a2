@@ -1,7 +1,7 @@
 1
 	a.  - Verify and fix what would cause a need for a tie resolution scheme
 	b.  - Impliment naive bayes
-	c.	- Take screenshots of plots before and after classification on all datasets.
+	c.	x Take screenshots of plots before and after classification on all datasets.
 
 2
 	- Impliment 10-fold cross validation

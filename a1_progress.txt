@@ -1,12 +1,12 @@
 1
 	a.  x Verify and fix what would cause a need for a tie resolution scheme
-	b.  - Impliment naive bayes
+	b.  x Impliment naive bayes
 	c.	x Take screenshots of plots before and after classification on all datasets.
 
 2
 	- Impliment 10-fold cross validation
 	- Talk about the 5 measures of efficiency
-	- Verify paragraph about how cross validation works
+	x Verify paragraph about how cross validation works
 
 3
 	- Fetch results of classifiers for each dataset

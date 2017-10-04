@@ -1,7 +1,7 @@
 # Used for importing dataset
 import pandas as pd
 
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from plot import plotGrid
 
@@ -14,11 +14,11 @@ test_size = 0.33
 knn_distance_function = 'euclidean'  # Equivalent to p=2, according to the documentation
 n_neighbors = 1
 
-# Loading dataset
+# The datasets we're classifying.
 dataset_files = [
-    #"datasets/clusterincluster.csv",
-    #"datasets/halfkernel.csv",
-    #"datasets/twogaussians.csv",
+    "datasets/clusterincluster.csv",
+    "datasets/halfkernel.csv",
+    "datasets/twogaussians.csv",
     "datasets/twospirals.csv"
 ]
 
@@ -29,7 +29,7 @@ dataset_files = [
 #
 ################################################################################
 def main():
-    print("-- K-nearest Neighbors --")
+    print("-- Naive Bayes --")
     for ds_file in dataset_files:
         # Isolating features and resulting y value
         dataset = pd.read_csv(ds_file, header=None)
@@ -40,9 +40,11 @@ def main():
         xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size=test_size)
 
         # Fitting our model
-        clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights='uniform', algorithm='auto',
-                                   metric=knn_distance_function)
+        clf = GaussianNB()
         clf.fit(xTrain, yTrain)
+
+        # Making predictions on the test set
+        #y_pred = clf.predict(xTest)
 
         # Plot twice; Once without color (ie: "unclassified" values), and once with color
         #plotGrid(clf, x, y, ds_file, 1, colored=False)

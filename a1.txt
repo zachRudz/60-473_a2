@@ -14,7 +14,14 @@ The decision rule of k-NN is essentially to poll the k nearest neighbors and cla
 Ex: We have a test sample X, and it's 1 nearest neighbor is of class C. There is no possibility of a tie, since there is only one possible class.
 
 Ex: We have a test sample X, and it's 4 nearest neighbors are split between classes A and B. Since each class has a 0.50% probability of being selected, we need a tie-resolution schema.
-Ex: We have a test sample X, and it's 3 nearest neighbors are of all different classes. Since each class has a 0.33% probability of being selected, we need a tie-resolution schema.
+Ex: We have a test sample X, and it's 3 nearest neighbors are of all different classes. Since each class has a 0.33% probability of being selected, we need a tie-resolution schema#.
+
+1b.
+-- Naive Bayes, no Cross Validation --
+Dataset: datasets/clusterincluster.csv	Score: 0.996969696969697
+Dataset: datasets/halfkernel.csv	Score: 0.9393939393939394
+Dataset: datasets/twogaussians.csv	Score: 0.9848484848484849
+Dataset: datasets/twospirals.csv	Score: 0.6303030303030303
 
 
 1c.
@@ -25,6 +32,6 @@ Then, I was able to use the remaining test data to see how well the classifier p
 score = clf.score(xTest, yTest)
 
 2.
-Cross validation is a method of choosing the best model to represent your data. Typically, you would split your dataset between testing, training, and validation sets. For this explanation, we'll consider only test and training sets. Now, if you split your dataset between training and test data (70-30 split, respectively), you want to make sure that the 70% subset of your dataset that you've chosen to train your model is the 70% of the dataset that will lead to best representing the test set (and hopefully new samples in the future). 
+Cross validation is a method of choosing the best model to represent your data. Typically, you would split your dataset between testing, training, and validation sets. For this explanation, we'll consider only test and training sets. Now, if you split your dataset between training and test data (70-30 split, respectively), you want to make sure that the 70% subset of your dataset that you've chosen to train your model is the 70% of the dataset that will lead to best representing the test set (and hopefully new samples in the future). In other words, it helps to avoid the bias of the test set bleeding into the model.
 
 Using 10-fold validation, you split your dataset into 10 parts. 7 parts training set, 3 parts test set perhaps. Then, you go through all the different combinations of training set parts and test set parts to determine which 7 parts of your dataset will create the best model to classify the 3 parts of the test set. You would use an evaluation metric to determine how incorrect your classification was, for each combination, and choose the combination which lead to the fewest errors to base your model on.

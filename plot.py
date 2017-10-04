@@ -12,8 +12,8 @@ def plotGrid(classifier, x, y, dataset_name, n_neighbors=1, colored=True):
     # Create color maps if the user wishes
     # An uncolored map is essentially an unclassified plot in this case (they're all just ambiguous points on the grid).
     if colored:
-        cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF'])
-        cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
+        cmap_light = ListedColormap(['#FFAAAA', '#AAAAFF'])
+        cmap_bold = ListedColormap(['#FF0000', '#0000FF'])
     else:
         cmap_light = ListedColormap([])
         cmap_bold = ListedColormap([])
@@ -40,6 +40,6 @@ def plotGrid(classifier, x, y, dataset_name, n_neighbors=1, colored=True):
                     edgecolor='k', s=20)
         plt.xlim(xx.min(), xx.max())
         plt.ylim(yy.min(), yy.max())
-        plt.title("3-Class classification (k = %i, weights = '%s')"
+        plt.title("2-Class classification (k = %i, weights = '%s')"
                   % (n_neighbors, weights))
         plt.suptitle("Dataset = '%s'" % (dataset_name))

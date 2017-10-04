@@ -48,11 +48,13 @@ def classify(cross_validation=True):
             kf = KFold(n_splits=10)
 
             for train_index, test_index in kf.split(x):
-                print("TRAIN: {} TEST: {}".format(train_index, test_index))
-                #xTrain, xTest = x[train_index], x[test_index]
-                #yTrain, yTest = y[train_index], y[test_index]
-                #clf = fitModel(1, xTrain, yTrain)
-                #score = clf.score(xTest, yTest)
+                xTrain, xTest = x.loc[train_index], x.loc[test_index]
+                yTrain, yTest = y.loc[train_index], y.loc[test_index]
+                clf = fitModel(1, xTrain, yTrain)
+                score = clf.score(xTest, yTest)
+
+                # Printing results
+                print("Dataset: {}\tScore: {}".format(ds_file, score))
 
         else:
             # Splitting into test/train sets

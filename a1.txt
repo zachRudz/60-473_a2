@@ -7,19 +7,7 @@ Dataset: datasets/twospirals.csv	    Score: 0.9454545454545454
 
 We would need to consider a tie-resolution scheme for k-NN in the scenario where...
 	1. k>1
-	2. AND...
-		2a. k is an even number.
-		2b. OR the number of potential classes is equal to k
-
-	# In more readable terms...
-	if(k > 1):
-		if(k%2 == 0):
-			# Use decision rule
-		else if(num_potential_classes == k):
-			# Use decision rule
-	else:
-		# Don't use decision rule
-
+	2. And the number of potential classes > 1
 
 The decision rule of k-NN is essentially to poll the k nearest neighbors and classify the test sample as whatever is the most popular class in the k nearest neighbours. Therefore, if we find k nearest neighbors, where the probability of the test sample being of class C[i] is the same as class C[j], then we need a tie-breaking schema. The above pseudocode should identify situations where a tie-breaker would be possible, and therefore a tie-breaking schema necessary.
 
@@ -27,6 +15,7 @@ Ex: We have a test sample X, and it's 1 nearest neighbor is of class C. There is
 
 Ex: We have a test sample X, and it's 4 nearest neighbors are split between classes A and B. Since each class has a 0.50% probability of being selected, we need a tie-resolution schema.
 Ex: We have a test sample X, and it's 3 nearest neighbors are of all different classes. Since each class has a 0.33% probability of being selected, we need a tie-resolution schema.
+
 
 1c.
 Once the database was loaded, I split the dataset into training and test sets. Using the training data, I trained the classifier:

@@ -1,5 +1,5 @@
 1
-	a.  - Verify and fix what would cause a need for a tie resolution scheme
+	a.  x Verify and fix what would cause a need for a tie resolution scheme
 	b.  - Impliment naive bayes
 	c.	x Take screenshots of plots before and after classification on all datasets.
 

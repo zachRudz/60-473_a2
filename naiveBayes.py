@@ -63,7 +63,7 @@ def classify(cross_validation=True):
 
         # Plot twice; Once without color (ie: "unclassified" values), and once with color
         # plotGrid(clf, x, y, ds_file, 1, colored=False)
-        # plotGrid(clf, x, y, ds_file, 1)
+        plotGrid(clf, x, y, ds_file, 1)
 
         # Making predictions on the test set
         y_pred = clf.predict(xTest)

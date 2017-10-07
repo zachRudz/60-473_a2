@@ -131,6 +131,39 @@ dataset: datasets/halfkernel.csv	score: 0.97
 dataset: datasets/twogaussians.csv	score: 1.0
 dataset: datasets/twospirals.csv	score: 0.67
 
+-- Finding best value of K for K-nearest Neighbors --
+Dataset: datasets/clusterincluster.csv
+	k: 1 Score: 1.0
+	...
+	k: 30 Score: 1.0
+	The best value of k is 1 with a score of 1.0
+Dataset: datasets/halfkernel.csv
+	k: 1 Score: 1.0
+	...
+	k: 30 Score: 1.0
+	The best value of k is 1 with a score of 1.0
+Dataset: datasets/twogaussians.csv
+	k: 1 Score: 0.9848484848484849
+	...
+	k: 19 Score: 0.9696969696969697
+	The best value of k is 1 with a score of 0.9848484848484849
+Dataset: datasets/twospirals.csv
+	k: 1 Score: 0.9424242424242424
+	k: 2 Score: 0.9575757575757575
+	k: 3 Score: 0.9545454545454546
+	k: 4 Score: 0.9424242424242424
+	k: 5 Score: 0.9272727272727272
+	k: 6 Score: 0.9545454545454546
+	k: 7 Score: 0.9636363636363636
+	...
+	k: 30 Score: 0.8909090909090909
+	The best value of k is 7 with a score of 0.9636363636363636
+
+- My search for the best k value did not use cross validation, because as mentioned earlier, my solution for CV is broken.
+- Suprisingly, in many cases, 1 is the best option for most datasets. The two spirals dataset is the only one where this is not the case, where 7 is the best value of k. 
+- Suprisingly even further, the k-nearest neighbors with k=7 classifier beats out k-nearest neighbor with k=1 classifier, even when the 1-NN algorithm uses cross validation.
+- For the first 3 datasets (cluster in cluster, half kernel, and two gaussians), the change in values of k didn't affect much. However, in the two spirals dataset, we were able to go from 67% accuracy with naive bayes (10-fold cross validation) to 96% with k-NN (k=7).
+
 6.
 clusterincluster.csv
 	- Both classifiers have 100% acuracy after cross validation. The k-NN algorithm seems to be more sensitive to noise and the training set, as the positive region has more room to accomadate noise. 

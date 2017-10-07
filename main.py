@@ -8,12 +8,16 @@ def main():
     print("0. Quit")
     print("1. K-Nearest Neighbors")
     print("2. Naive Bayes")
+    print("3. Find best value of k for k-NN")
     classifier = input("What classifier do you want to try? ")
 
     # Parsing decision
     if classifier == "0":
         quit(0)
-    elif classifier not in ["1", "2"]:
+    elif classifier == "3":
+        kNearestNeighbors.findBestValueOfK()
+        return
+    elif classifier not in ["1", "2", "3"]:
         print("Not a valid input. Exiting...")
         quit(0)
 
@@ -36,7 +40,7 @@ def main():
     if classifier == "0":
         quit(0)
     if classifier == "1":
-        kNearestNeighbors.classify(cross_validation=cross_validation)
+        kNearestNeighbors.classify(n_neighbors=1, cross_validation=cross_validation)
     elif classifier == "2":
         # -- Naive bayes --
         naiveBayes.classify(cross_validation=cross_validation)

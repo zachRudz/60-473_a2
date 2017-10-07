@@ -1,9 +1,9 @@
 # Used for importing dataset
 import pandas as pd
-
+from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split, KFold
 
+from classifier import printMeasuresOfEfficiency
 from crossValidation import cross_validate
 from plot import plotGrid
 
@@ -56,13 +56,18 @@ def classify(cross_validation=True):
             clf = fitModel(xTrain, yTrain, n_neighbors=1)
             score = clf.score(xTest, yTest)
 
-
-            # Making predictions on the test set
-            #y_pred = clf.predict(xTest)
-
         # Plot twice; Once without color (ie: "unclassified" values), and once with color
+        # THis was taking a while on my machine, please uncomment if you're interested
         #plotGrid(clf, x, y, ds_file, 1, colored=False)
-        plotGrid(clf, x, y, ds_file, 1)
+        #plotGrid(clf, x, y, ds_file, 1)
+
+        # Making predictions on the test set
+        y_pred = clf.predict(xTest)
+        #print(yTest.shape)
+        #print(y_pred.shape)
+        #print(confusion_matrix(yTest, y_pred))
+
 
         # Printing results
         print("Dataset: {}\tScore: {}".format(ds_file, score))
+        printMeasuresOfEfficiency(yTest, y_pred)

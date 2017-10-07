@@ -36,6 +36,88 @@ Cross validation is a method of choosing the best model to represent your data. 
 
 Using 10-fold validation, you split your dataset into 10 parts. 7 parts training set, 3 parts test set perhaps. Then, you go through all the different combinations of training set parts and test set parts to determine which 7 parts of your dataset will create the best model to classify the 3 parts of the test set. You would use an evaluation metric to determine how incorrect your classification was, for each combination, and choose the combination which lead to the fewest errors to base your model on.
 
+I reached an interesting scenario; When using 10-fold cross validation, my test set would only contain a single class. This would lead to classifications of 100% accuracy. The result of this happening meant that the confusion matrix would end up being a single value: [[100]], where 100 is the number of samples in the test set. This is probably due to how I implimented cross validation. I think there's more built in methods for cross validation that I'll have to look into. Because of all this, I'm including the results of the 5 measures of efficiency for both the classifiers, and with/without cross validation.
+
+
+-- K-nearest Neighbors, cross validation --
+Dataset: datasets/clusterincluster.csv	Score: 1.0
+	Test set contains one class only. There is no false positive or false negative; Only the one class.
+Dataset: datasets/halfkernel.csv	Score: 1.0
+	Test set contains one class only. There is no false positive or false negative; Only the one class.
+Dataset: datasets/twogaussians.csv	Score: 1.0
+	tn: 6  fp: 0  fn: 0  tp: 34
+	specificity: 1.0
+	sensitivity: 1.0
+	ppv: 1.0
+	npv: 1.0
+Dattaset: datasets/twospirals.csv	Score: 0.95
+	Test set contains one class only. There is no false positive or false negative; Only the one class.
+
+-- K-nearest Neighbors, no cross validation --
+Dataset: datasets/clusterincluster.csv	Score: 1.0
+	tn: 164  fp: 0  fn: 0  tp: 166
+	specificity: 1.0
+	sensitivity: 1.0
+	ppv: 1.0
+	npv: 1.0
+Dataset: datasets/halfkernel.csv	Score: 1.0
+	tn: 157  fp: 0  fn: 0  tp: 173
+	specificity: 1.0
+	sensitivity: 1.0
+	ppv: 1.0
+	npv: 1.0
+Dataset: datasets/twogaussians.csv	Score: 0.9621212121212122
+	tn: 71  fp: 2  fn: 3  tp: 56
+	specificity: 0.9726027397260274
+	sensitivity: 0.9726027397260274
+	ppv: 0.9726027397260274
+	npv: 0.9726027397260274
+Dataset: datasets/twospirals.csv	Score: 0.9212121212121213
+	tn: 155  fp: 14  fn: 12  tp: 149
+	specificity: 0.9171597633136095
+	sensitivity: 0.9171597633136095
+	ppv: 0.9171597633136095
+	npv: 0.9171597633136095
+
+-- Naive Bayes, cross validation --
+Dataset: datasets/clusterincluster.csv	Score: 1.0
+	Test set contains one class only. There is no false positive or false negative; Only the one class.
+Dataset: datasets/halfkernel.csv	Score: 0.97
+	Test set contains one class only. There is no false positive or false negative; Only the one class.
+Dataset: datasets/twogaussians.csv	Score: 1.0
+	Test set contains one class only. There is no false positive or false negative; Only the one class.
+Dataset: datasets/twospirals.csv	Score: 0.67
+	tn: 0  fp: 0  fn: 33  tp: 67
+	(Divide by zero error occurs here)
+
+-- Naive Bayes, no cross validation --
+Dataset: datasets/clusterincluster.csv	Score: 1.0
+	tn: 161  fp: 0  fn: 0  tp: 169
+	specificity: 1.0
+	sensitivity: 1.0
+	ppv: 1.0
+	npv: 1.0
+Dataset: datasets/halfkernel.csv	Score: 0.9575757575757575
+	tn: 155  fp: 5  fn: 9  tp: 161
+	specificity: 0.96875
+	sensitivity: 0.96875
+	ppv: 0.96875
+	npv: 0.96875
+Dataset: datasets/twogaussians.csv	Score: 0.9545454545454546
+	tn: 67  fp: 4  fn: 2  tp: 59
+	specificity: 0.9436619718309859
+	sensitivity: 0.9436619718309859
+	ppv: 0.9436619718309859
+	npv: 0.9436619718309859
+Dataset: datasets/twospirals.csv	Score: 0.603030303030303
+	tn: 97  fp: 63  fn: 68  tp: 102
+	specificity: 0.60625
+	sensitivity: 0.60625
+	ppv: 0.60625
+	npv: 0.60625
+
+
+
 3.
 -- K-nearest Neighbors, 10-fold cross validation --
 Dataset: datasets/clusterincluster.csv	Score: 1.0
@@ -44,7 +126,21 @@ Dataset: datasets/twogaussians.csv	Score: 1.0
 Dataset: datasets/twospirals.csv	Score: 0.95
 
 -- Naive Bayes, 10-fold cross validation --
-Dataset: datasets/clusterincluster.csv	Score: 1.0
-Dataset: datasets/halfkernel.csv	Score: 0.97
-Dataset: datasets/twogaussians.csv	Score: 1.0
-Dataset: datasets/twospirals.csv	Score: 0.67
+dataset: datasets/clusterincluster.csv	score: 1.0
+dataset: datasets/halfkernel.csv	score: 0.97
+dataset: datasets/twogaussians.csv	score: 1.0
+dataset: datasets/twospirals.csv	score: 0.67
+
+6.
+clusterincluster.csv
+	- Both classifiers have 100% acuracy after cross validation. The k-NN algorithm seems to be more sensitive to noise and the training set, as the positive region has more room to accomadate noise. 
+	- I'd say that the k-NN version is better for this reason, as the bayes classifier would probably lead to some false negative classifications (especially near the coordinates of (1,1).
+halfkernel.csv
+	- The k-NN classifier outdoes the bayes classifier here. The k-NN classifier takes on more of an elipse shape, properly classifying all datapoints. The bayes classifier however, takes on a spherical shape, misclassifying quite a bit of points. 
+	- The k-NN algorithm is clearly better for this dataset, as further points would be properly classified.
+twogaussians.csv
+	- In this case, both classifiers seem to have 100% accuracy. However, there is quite a bit of noise in the center of the two gaussians, which I feel would be mis-classified easily. You can see that the k-NN classifier bleeds into the negative gaussian. 
+	- This makes me think that the bayes classifier would be more effective in this case. It succeeds in isolating positive from negative, while ignoring some of the noise in the center.
+twospirals.csv
+	- Once again, the k-NN is the best classifier here. it properly forms the shape of the interweiving spirals, without listening too closely to the noise. The bayes classifier however, attempts to linearly separate a non-linearly seperable dataset, causing it's accuracy to be a low 67%.
+	- For these reasons, the k-NN algorithm is better.

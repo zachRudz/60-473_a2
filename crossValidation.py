@@ -22,4 +22,5 @@ def cross_validate(fitModel, x, y, n_splits=10):
 
     # Training the model based on the best values
     clf = fitModel(xTrain, yTrain)
+    #print("best_score: {}  best_xTrain: {}  best_xTest: {}  best_yTrain: {}  best_yTest: {}".format(best_score, best_xTrain, best_xTest, best_yTrain, best_yTest))
     return clf, best_score, best_xTrain, best_xTest, best_yTrain, best_yTest

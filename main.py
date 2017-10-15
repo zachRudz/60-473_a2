@@ -1,28 +1,37 @@
 import naiveBayes
 import kNearestNeighbors
+import svm
 
 
 def main():
+
+
     # -- Classifier? --
-    print("60-473 assignment 01")
+    print("60-473 assignment 02")
     print("0. Quit")
-    print("1. K-Nearest Neighbors")
-    print("2. Naive Bayes")
-    print("3. Find best value of k for k-NN")
-    classifier = input("What classifier do you want to try? ")
+    print("1. Linear")
+    print("2. Polynomial")
+    print("3. RBF")
+    kernelDecision = input("What kind of SVM kernel do you want to try? ")
 
     # Parsing decision
-    if classifier == "0":
+    if kernelDecision == "0":
         quit(0)
-    elif classifier == "3":
-        kNearestNeighbors.findBestValueOfK()
-        return
-    elif classifier not in ["1", "2", "3"]:
+    elif kernelDecision not in ["1", "2", "3"]:
         print("Not a valid input. Exiting...")
         quit(0)
 
+    # Setting the kernelDecision.g
+    if kernelDecision == "1":
+        kernel = "linear"
+    elif kernelDecision == "2":
+        kernel = "poly"
+    else:
+        kernel = "rbf"
+
+
     # -- Cross validation? --
-    print("\nUse cross validation?")
+    print("\nUse 10-fold cross validation?")
     print("0. Exit")
     print("1. Yes")
     print("2. No")
@@ -36,14 +45,7 @@ def main():
         quit(0)
     cross_validation = cvDecision == "1"
 
-    # -- Starting classifier --
-    if classifier == "0":
-        quit(0)
-    if classifier == "1":
-        kNearestNeighbors.classify(n_neighbors=1, cross_validation=cross_validation)
-    elif classifier == "2":
-        # -- Naive bayes --
-        naiveBayes.classify(cross_validation=cross_validation)
+    svm.classify(kernel=kernel, cross_validation=cross_validation)
 
 
 if __name__ == "__main__":

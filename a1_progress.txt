@@ -1,24 +1,17 @@
-1
-	a.  x Verify and fix what would cause a need for a tie resolution scheme
-	b.  x Impliment naive bayes
-	c.	x Take screenshots of plots before and after classification on all datasets.
+2.
+    x. Linear kernel
+    x. Polynomial kernel
+    x. RBF
 
-2
-	x Impliment 10-fold cross validation
-	x Talk about the 5 measures of efficiency
-	x Verify paragraph about how cross validation works
+3.
+    10-fold cross validation
+    Find measures of efficiency
 
-3
-	x Fetch results of classifiers for each dataset
+4.
+    Compare performances between 3 classifiers
 
-4
-	- Find the best value of k for k-NN.
-	- Compare results with 1-NN and naive bayes
-	- What is the best value of k for each dataset?
+5.
+    Plot ROC curve for 2c
 
-5
-	x Reference pics from part 1
-
-6
-	x Talk about the behaviour of each classifier.
-	x Talk about which classifier is best for each DS
+6.
+    Compare the performances of the classifiers (area under the ROC curve and performance)

@@ -1,30 +1,38 @@
-1.
+1. Submittables
+a. The SVM tool used was scikit, a python library used for simple, painless machine learning.
+I used it to create models for our SVMs (using all 3 kernels), to perform 10-fold cross validation, and to report the related metrics of classifier strength.
+
+b. Please see the below pages; Included are the results from each step of the assignment as they were completed.
+c.
+
+
+2.
 -- SVM Linear Kernel, no CV --
- Dataset: datasets/clusterincluster.csv	Score: 0.4575757575757576
- 	tn: 0  fp: 179  fn: 0  tp: 151
- 	specificity: 0.0
- 	sensitivity: 0.0
- 	ppv: 0.0
- 	npv: 0.0
- 	# Note: Divide by 0 errors here
- Dataset: datasets/halfkernel.csv	Score: 0.7242424242424242
- 	tn: 140  fp: 21  fn: 70  tp: 99
- 	specificity: 0.8695652173913043
- 	sensitivity: 0.8695652173913043
- 	ppv: 0.8695652173913043
- 	npv: 0.8695652173913043
- Dataset: datasets/twogaussians.csv	Score: 0.9848484848484849
- 	tn: 65  fp: 1  fn: 1  tp: 65
- 	specificity: 0.9848484848484849
- 	sensitivity: 0.9848484848484849
- 	ppv: 0.9848484848484849
- 	npv: 0.9848484848484849
- Dataset: datasets/twospirals.csv	Score: 0.6363636363636364
- 	tn: 107  fp: 61  fn: 59  tp: 103
- 	specificity: 0.6369047619047619
- 	sensitivity: 0.6369047619047619
- 	ppv: 0.6369047619047619
- 	npv: 0.6369047619047619
+Dataset: datasets/clusterincluster.csv	Score: 0.48787878787878786
+	tn: 161  fp: 0  fn: 169  tp: 0
+	specificity: 1.0
+	sensitivity: 1.0
+	ppv: 1.0
+	npv: 1.0
+	# Note: Divide by 0 exception here
+Dataset: datasets/halfkernel.csv	Score: 0.7393939393939394
+	tn: 150  fp: 24  fn: 62  tp: 94
+	specificity: 0.8620689655172413
+	sensitivity: 0.8620689655172413
+	ppv: 0.8620689655172413
+	npv: 0.8620689655172413
+Dataset: datasets/twogaussians.csv	Score: 0.9545454545454546
+	tn: 63  fp: 2  fn: 4  tp: 63
+	specificity: 0.9692307692307692
+	sensitivity: 0.9692307692307692
+	ppv: 0.9692307692307692
+	npv: 0.9692307692307692
+Dataset: datasets/twospirals.csv	Score: 0.6393939393939394
+	tn: 102  fp: 83  fn: 36  tp: 109
+	specificity: 0.5513513513513514
+	sensitivity: 0.5513513513513514
+	ppv: 0.5513513513513514
+	npv: 0.5513513513513514
 
 
 -- SVM Polynomial Kernel, no CV --
@@ -54,9 +62,6 @@ Dataset: datasets/twospirals.csv	Score: 0.5909090909090909
 	npv: 0.4972677595628415
 
 
-
-
-
 -- SVM RBF Kernel, no CV --
 Dataset: datasets/clusterincluster.csv	Score: 1.0
 	tn: 168  fp: 0  fn: 0  tp: 162
@@ -82,3 +87,106 @@ Dataset: datasets/twospirals.csv	Score: 0.9606060606060606
 	sensitivity: 0.9642857142857143
 	ppv: 0.9642857142857143
 	npv: 0.9642857142857143
+
+
+3.
+-- SVM Linear Kernel with 10-fold CV --
+Dataset: datasets/clusterincluster.csv	Score: 0.59
+Averages of the measures of efficiency are below:
+	tn: 287.6  fp: 212.4  fn: 234.8  tp: 265.2
+	specificity: 0.5751999999999999
+	sensitivity: 0.5304
+	ppv: 0.0025084227257535195
+	npv: nan
+	# Had a runtime error (invalid value encountered in long_scalars) when calculating the i'th npv, not sure what happened here.
+Dataset: datasets/halfkernel.csv	Score: 0.8
+Averages of the measures of efficiency are below:
+	tn: 434.1  fp: 65.9  fn: 197.9  tp: 302.1
+	specificity: 0.8682000000000001
+	sensitivity: 0.6042000000000001
+	ppv: 0.0027202738879497095
+	npv: 0.6868184024769269
+Dataset: datasets/twogaussians.csv	Score: 1.0
+Averages of the measures of efficiency are below:
+	tn: 199.3  fp: 6.7  fn: 4.7  tp: 189.3
+	specificity: 0.9674757281553397
+	sensitivity: 0.9757731958762885
+	ppv: 0.0051022811133977905
+	npv: 0.976988495431651
+Dataset: datasets/twospirals.csv	Score: 0.73
+Averages of the measures of efficiency are below:
+	tn: 306.9  fp: 193.1  fn: 165.9  tp: 334.1
+	specificity: 0.6138
+	sensitivity: 0.6682
+	ppv: 0.0018968664194045596
+	npv: 0.6491186528159893
+
+Start time: 2017-11-01 13:16:02.311776
+End time: 2017-11-01 13:16:50.785192
+Total elapsed time: 0:00:48.473416
+
+-- SVM Polynomial Kernel with 10-fold CV --
+(Let this one sit for over an hour, didn't seem to be making any progress.)
+Dataset: datasets/clusterincluster.csv	Score: 0.68
+Averages of the measures of efficiency are below:
+	tn: 450.0  fp: 50.0  fn: 316.7  tp: 183.3
+	specificity: 0.9
+	sensitivity: 0.36660000000000004
+	ppv: 0.006319657038890991
+	npv: nan
+	# Had a runtime error (invalid value encountered in long_scalars) when calculating the i'th npv, not sure what happened here.
+Total elapsed time: 0:00:43.384040
+
+-- SVM RBF Kernel with 10-fold CV --
+Dataset: datasets/clusterincluster.csv	Score: 1.0
+Averages of the measures of efficiency are below:
+	tn: 500.0  fp: 0.0  fn: 0.0  tp: 500.0
+	specificity: 1.0
+	sensitivity: 1.0
+	ppv: 0.0020000000000000005
+	npv: 1.0
+Dataset: datasets/halfkernel.csv	Score: 1.0
+Averages of the measures of efficiency are below:
+	tn: 498.9  fp: 1.1  fn: 0.0  tp: 500.0
+	specificity: 0.9978
+	sensitivity: 1.0
+	ppv: 0.001995613553768956
+	npv: 1.0
+Dataset: datasets/twogaussians.csv	Score: 1.0
+Averages of the measures of efficiency are below:
+	tn: 201.4  fp: 4.6  fn: 3.0  tp: 191.0
+	specificity: 0.9776699029126213
+	sensitivity: 0.9845360824742269
+	ppv: 0.005112613613619124
+	npv: 0.9853225314066769
+Dataset: datasets/twospirals.csv	Score: 0.97
+Averages of the measures of efficiency are below:
+	tn: 494.3  fp: 5.7  fn: 8.3  tp: 491.7
+	specificity: 0.9886000000000001
+	sensitivity: 0.9833999999999998
+	ppv: 0.002010521544390943
+	npv: 0.9835055522668631
+Start time: 2017-11-01 16:29:49.989802
+End time: 2017-11-01 16:32:35.438748
+Total elapsed time: 0:02:45.448946
+
+
+4.
+Since Polynomial kernels with cross validation kills my laptop, I'll be comparing linear kernel w/ CV, polynomial kernel w/ no CV, and RBF kernel w/ CV.
+
+-- Linear Kernel --
+It seems that the linear kernel is more or less only good for linearly separable, or near-linearly seperable datasets. In all of the 4 datasets, there are clearly many points which are misclassified. Only two gaussians dataset seemed to be close to seperable, however the performance was beaten strongly by the RBF kernel. None of the other datasets are linearly seperable, so I didn't expect for this classifier to perform well.
+
+In my opinion, I would only use the linear kernel when first testing out the dataset (to see if it can be cleanly linearly seperable), or if I wanted an SVM classifier very quickly. The linear kernel took a total of 48 seconds to classify and plot all 4 datasets, which is a lot quicker than the other two kernels. It's quick and easy, but not quite a good fit for the use cases presented to us in these 4 datasets.
+
+-- Polynomial kernel (no CV) --
+In contrast, the polynomial kernel had better, but still not stunning results. It was able to handle the two gaussians dataset a bit better than the linear kernel, but the rest of the datasets weren't anything to write home about. I was expecting the polynomial kernel to be able to properly classify all of the points in the half-kernel dataset since it's visually seperable by a quadratic line, however it came out with a strange pattern. I'm sure that this would have been resolved if I were able to wait long enough for polynomial kernel with 10-fold cross validation to work on this dataset. Regardless of time spent building the model, this classifier would be better suited for the half kernel dataset since it's quadratically (?) sepearable. The other datasets would not perform well with this classifier, since they don't seem to cleanly separate in into side A vs side B.
+
+In other news, I've been running the classifier with a polynomial kernel and 10-fold cross validation for about an hour, and I still don't have results for the half kernel dataset. I can only assume that the other datasets would take this long as well, which doesn't look promising to me. In all of the cases I ran the polynomial kernel classifier, the RBF classifier outperformed it. I would consider using the polynomial kernel if someone showed me that it was worth the time, but otherwise I think the time spent waiting for computation could be put to better use elsewhere.
+
+-- RBF Kernel --
+RBF seems to be the best choice for all of the databases to me. The shape of the decision boundary resembles the k-nearest neighbors decision boundary, which also did very  well on all of the datasets. With average scores of 97%-100%, this is a strong kernel, for all of the datasets. My one concern with this kernel, similar to k-NN, is that new points that are visually far from the negative class may get falsly classified as such. For example, the half-kernel classifier has some gaps in the middle of the positive area, which could very well be the location of a new positive point. For that reason, I would consider using a polynomial classifier on the half kernel dataset.
+
+The RBF kernel took a bit under 3 minutes to handle all 4 datasets, which was refreshing after the experience with the polynomial kernel. I would consider using this in a real life application right after the linear kernel, as it's a quick and strong classifier.
+
+

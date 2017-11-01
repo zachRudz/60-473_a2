@@ -1,10 +1,12 @@
 import naiveBayes
 import kNearestNeighbors
 import svm
+import datetime
 
 
 def main():
-
+    startTime = datetime.datetime.now()
+    print("Start time: {}".format(startTime))
 
     # -- Classifier? --
     print("60-473 assignment 02")
@@ -46,6 +48,15 @@ def main():
     cross_validation = cvDecision == "1"
 
     svm.classify(kernel=kernel, cross_validation=cross_validation)
+
+    # Printing time analytics
+    endTime = datetime.datetime.now()
+    diffTime = endTime - startTime
+    print("Start time: {}".format(startTime))
+    print("End time: {}".format(endTime))
+    print("Total elapsed time: {}".format(diffTime))
+
+
 
 
 if __name__ == "__main__":

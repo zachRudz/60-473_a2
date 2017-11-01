@@ -4,11 +4,11 @@
     x. RBF
 
 3.
-    10-fold cross validation
-    Find measures of efficiency
+    x 10-fold cross validation
+    x Find measures of efficiency
 
 4.
-    Compare performances between 3 classifiers
+    x Compare performances between 3 classifiers
 
 5.
     Plot ROC curve for 2c

@@ -1,8 +1,9 @@
 # Used for importing dataset
 import math
 import pandas as pd
-from sklearn import svm
-from sklearn.model_selection import train_test_split
+from sklearn import svm, metrics
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split, cross_val_score, cross_val_predict, KFold
 
 from classifier import printMeasuresOfEfficiency
 from crossValidation import cross_validate
@@ -14,14 +15,28 @@ from plot import plotGrid
 #
 ################################################################################
 test_size = 0.33
+n_folds = 10
 
 # The datasets we're classifying.
 dataset_files = [
-    "datasets/clusterincluster.csv",
-    "datasets/halfkernel.csv",
-    "datasets/twogaussians.csv",
-    "datasets/twospirals.csv"
+    #"datasets/clusterincluster.csv"
+    "datasets/halfkernel.csv"
+    #"datasets/twogaussians.csv",
+    #"datasets/twospirals.csv"
 ]
+
+
+################################################################################
+#
+# Helper functions
+#
+################################################################################
+def getMean(intArray):
+    total = 0
+    for i in intArray:
+        total += i
+
+    return total / len(intArray)
 
 
 ################################################################################
@@ -37,41 +52,97 @@ def classify(kernel, cross_validation=False):
         x = dataset.loc[:, 0:1]
         y = dataset.loc[:, 2]
 
+        # Creating our classifier
+        clf = svm.SVC(kernel=kernel, gamma=2)
+
         # When building our model, should we use cross validation, or just split the data?
         if cross_validation:
-            # Fitting our model
-            clf = svm.SVC(kernel=kernel)
-            clf.fit(xTrain, yTrain)
+            best_score = -1
 
-            #clf, score, xTrain, xTest, yTrain, yTest = cross_validate(fitModel, x, y)
+            # Declaring empty int arrays for each measure of efficiency. Used for finding average later on
+            tn = [0] * n_folds
+            fp = [0] * n_folds
+            fn = [0] * n_folds
+            tp = [0] * n_folds
+            specificity = [0] * n_folds
+            sensitivity = [0] * n_folds
+            ppv = [0] * n_folds
+            npv = [0] * n_folds
+
+            # K-Folding
+            kf = KFold(n_splits=n_folds, shuffle=True)
+            i = 0
+            for index_train, index_test in kf.split(x):
+                xTrain, xTest = x.loc[index_train], x.loc[index_test]
+                yTrain, yTest = y.loc[index_train], y.loc[index_test]
+                clf.fit(xTrain, yTrain)
+
+                # Evaluating the model
+                score = clf.score(xTest, yTest)
+                if score > best_score:
+                    best_score = score
+                    best_xTest = xTest
+                    best_yTest = yTest
+                    best_xTrain = xTrain
+                    best_yTrain = yTrain
+
+                # Making predictions on the test fold which had the best training set
+                # ie: We found the optimal training set using CV, and we're making predictions of y
+                #      using the corresponding test set
+                y_pred = clf.predict(x)
+
+                # Fetching the measure of efficiency
+                tn[i], fp[i], fn[i], tp[i] = confusion_matrix(y, y_pred).ravel()
+                # Measures of efficiency
+                # ppv: positive predicted values
+                # npv: negative predicted values
+                # sensitivity (recall): negative predicted values
+                specificity[i] = tn[i] / (tn[i] + fp[i])
+                sensitivity[i] = tp[i] / (tp[i] + fn[i])
+                ppv[i] = tp[i] / tp[i] / (tp[i] + fp[i])
+                npv[i] = tn[i] / (tn[i] + fn[i])
+                i = i + 1
+
+            # Now that we've found the best representation of our data via CV,
+            # we can fit the classifier on our "best" training set.
+            clf.fit(best_xTrain, best_yTrain)
+
+            # Making predictions on the test fold which had the best training set
+            # ie: We found the optimal training set using CV, and we're making predictions of y
+            #      using the corresponding test set
+            #y_pred = clf.predict(xTest)
+
+            # Printing results
+            print("Dataset: {}\tScore: {}".format(ds_file, best_score))
+            print("Averages of the measures of efficiency are below:")
+            print("\ttn: {}  fp: {}  fn: {}  tp: {}".format(getMean(tn), getMean(fp), getMean(fn), getMean(tp)))
+            print("\tspecificity: {}".format(getMean(specificity)))
+            print("\tsensitivity: {}".format(getMean(sensitivity)))
+            print("\tppv: {}".format(getMean(ppv)))
+            print("\tnpv: {}".format(getMean(npv)))
+
 
         else:
             # Splitting into test/train sets
             xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size=test_size)
 
             # Fitting our model
-            clf = svm.SVC(kernel=kernel, gamma=2)
             clf.fit(xTrain, yTrain)
 
             # Evaluating the model
             score = clf.score(xTest, yTest)
 
+            # Making predictions on the test set
+            y_pred = clf.predict(xTest)
+
+            # Printing results
+            print("Dataset: {}\tScore: {}".format(ds_file, score))
+            printMeasuresOfEfficiency(yTest, y_pred)
+
         # Plot the grid
         plotGrid(clf, x, y, ds_file, 1)
 
-        # Making predictions on the test set
-        y_pred = clf.predict(xTest)
-        #print(yTest.shape)
-        #print(y_pred.shape)
-        #print(confusion_matrix(yTest, y_pred))
-
-
-        # Printing results
-        print("Dataset: {}\tScore: {}".format(ds_file, score))
-        printMeasuresOfEfficiency(yTest, y_pred)
-
-
-#def findBestValueOfK():
+# def findBestValueOfK():
 #    print("-- Finding best value of K for K-nearest Neighbors --")
 #    for ds_file in dataset_files:
 #        # Isolating features and resulting y value
@@ -114,4 +185,3 @@ def classify(kernel, cross_validation=False):
 #        # Newline
 #        print("\tThe best value of k is {} with a score of {}".format(bestKValue, bestScore))
 #        print()
-

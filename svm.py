@@ -2,12 +2,13 @@
 import math
 import pandas as pd
 from sklearn import svm, metrics
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, roc_curve, auc
 from sklearn.model_selection import train_test_split, cross_val_score, cross_val_predict, KFold
 
 from classifier import printMeasuresOfEfficiency
 from crossValidation import cross_validate
 from plot import plotGrid
+import matplotlib.pyplot as plt
 
 ################################################################################
 #
@@ -19,10 +20,10 @@ n_folds = 10
 
 # The datasets we're classifying.
 dataset_files = [
-    #"datasets/clusterincluster.csv"
-    "datasets/halfkernel.csv"
-    #"datasets/twogaussians.csv",
-    #"datasets/twospirals.csv"
+    "datasets/clusterincluster.csv",
+    "datasets/halfkernel.csv",
+    "datasets/twogaussians.csv",
+    "datasets/twospirals.csv"
 ]
 
 
@@ -142,46 +143,57 @@ def classify(kernel, cross_validation=False):
         # Plot the grid
         plotGrid(clf, x, y, ds_file, 1)
 
-# def findBestValueOfK():
-#    print("-- Finding best value of K for K-nearest Neighbors --")
-#    for ds_file in dataset_files:
-#        # Isolating features and resulting y value
-#        dataset = pd.read_csv(ds_file, header=None)
-#        x = dataset.loc[:, 0:1]
-#        y = dataset.loc[:, 2]
-#
-#        # Only searching from values [1..sqrt(numSamples)]
-#        maxKValue = math.sqrt(len(x[0]))
-#        maxKValue = math.floor(maxKValue)
-#
-#        # Recording the score of each value of k, so we can compare to find the best.
-#        bestKValue = 0
-#        bestScore = 0
-#
-#        print("Dataset: {}".format(ds_file))
-#        for k in range(1,maxKValue):
-#            # Splitting into test/train sets
-#            # Not using cross validation because my CV implimentation is broken
-#            xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size=test_size)
-#
-#            # Fitting our model
-#            clf = fitModel(xTrain, yTrain, n_neighbors=k)
-#            score = clf.score(xTest, yTest)
-#
-#            # Making predictions on the test set
-#            y_pred = clf.predict(xTest)
-#            #print(yTest.shape)
-#            #print(y_pred.shape)
-#            #print(confusion_matrix(yTest, y_pred))
-#
-#            # Printing results
-#            print("\tk: {} Score: {}".format(k, score))
-#
-#            # Comparing to our best value of k so far
-#            if(score > bestScore):
-#                bestKValue = k
-#                bestScore = score
-#
-#        # Newline
-#        print("\tThe best value of k is {} with a score of {}".format(bestKValue, bestScore))
-#        print()
+
+# Reference: https://matplotlib.org/users/pyplot_tutorial.html
+# Reference: http://scikit-learn.org/stable/auto_examples/model_selection/plot_roc_crossval.html
+def calculateROC(kernel="rbf"):
+
+    gamma = ['auto', '1', '2', '3', '4']
+    dsNum = 0
+    for ds_file in dataset_files:
+        plt.figure(dsNum + 1)
+
+        # Isolating features and resulting y value
+        dataset = pd.read_csv(ds_file, header=None)
+        x = dataset.loc[:, 0:1]
+        y = dataset.loc[:, 2]
+
+        # Creating our classifier
+        clf = svm.SVC(kernel=kernel, degree=2, gamma=2, probability=True)
+
+        # K-Folding
+        kf = KFold(n_splits=n_folds, shuffle=True)
+        i = 0
+        for index_train, index_test in kf.split(x):
+            # Train/test indicies
+            xTrain, xTest = x.loc[index_train], x.loc[index_test]
+            yTrain, yTest = y.loc[index_train], y.loc[index_test]
+            clf.fit(xTrain, yTrain)
+
+            # Calculating the ROC curve
+            probabilities = clf.predict_proba(xTest)
+            fpr, tpr, thresholds = roc_curve(yTest, probabilities[:, 1], pos_label=2)
+
+            # Calculating the area under the curve
+            roc_auc = auc(fpr, tpr)
+
+            # Plotting the ROC curve for this fold
+            plt.plot(fpr, tpr, lw=1, alpha=0.3,
+                     label="ROC fold %d (AUC = %0.2f)" % (i, roc_auc))
+
+            i += 1
+
+        # Plotting the line of luck
+        plt.plot([0,1], [0,1], linestyle="--", lw=2, color='r', label="Luck", alpha=.8)
+
+        # Setting up the plot
+        plt.xlim([-0.05, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title('ROC curve for dataset {}'.format(ds_file))
+        plt.legend(loc="lower right")
+        plt.show()
+
+        # Moving on to the next dataset/figure
+        dsNum += 1
+

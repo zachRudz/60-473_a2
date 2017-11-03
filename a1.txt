@@ -121,8 +121,6 @@ Averages of the measures of efficiency are below:
 	ppv: 0.0018968664194045596
 	npv: 0.6491186528159893
 
-Start time: 2017-11-01 13:16:02.311776
-End time: 2017-11-01 13:16:50.785192
 Total elapsed time: 0:00:48.473416
 
 -- SVM Polynomial Kernel with 10-fold CV --
@@ -136,6 +134,24 @@ Averages of the measures of efficiency are below:
 	npv: nan
 	# Had a runtime error (invalid value encountered in long_scalars) when calculating the i'th npv, not sure what happened here.
 Total elapsed time: 0:00:43.384040
+
+Dataset: datasets/twogaussians.csv	Score: 1.0
+Averages of the measures of efficiency are below:
+	tn: 201.6  fp: 4.4  fn: 3.1  tp: 190.9
+	specificity: 0.978640776699029
+	sensitivity: 0.9840206185567011
+	ppv: 0.005120490299977576
+	npv: 0.9848704108354376
+Total elapsed time: 0:00:01.714871
+
+Dataset: datasets/twospirals.csv	Score: 0.67
+Averages of the measures of efficiency are below:
+	tn: 280.9  fp: 219.1  fn: 165.6  tp: 334.4
+	specificity: 0.5618000000000001
+	sensitivity: 0.6688
+	ppv: 0.00181361148033466
+	npv: 0.6286496279884635
+Total elapsed time: 3:17:12.482946
 
 -- SVM RBF Kernel with 10-fold CV --
 Dataset: datasets/clusterincluster.csv	Score: 1.0
@@ -166,13 +182,12 @@ Averages of the measures of efficiency are below:
 	sensitivity: 0.9833999999999998
 	ppv: 0.002010521544390943
 	npv: 0.9835055522668631
-Start time: 2017-11-01 16:29:49.989802
-End time: 2017-11-01 16:32:35.438748
+
 Total elapsed time: 0:02:45.448946
 
 
 4.
-Since Polynomial kernels with cross validation kills my laptop, I'll be comparing linear kernel w/ CV, polynomial kernel w/ no CV, and RBF kernel w/ CV.
+Since Polynomial kernels with cross validation kills my laptop, I'll be comparing linear kernel w/ CV, polynomial kernel w/ no CV, and RBF kernel w/ CV. I've only been able to get a final result with the cluster in cluster and two gaussians datasets. The other two datasets have shown no result even after an hour of running.
 
 -- Linear Kernel --
 It seems that the linear kernel is more or less only good for linearly separable, or near-linearly seperable datasets. In all of the 4 datasets, there are clearly many points which are misclassified. Only two gaussians dataset seemed to be close to seperable, however the performance was beaten strongly by the RBF kernel. None of the other datasets are linearly seperable, so I didn't expect for this classifier to perform well.
@@ -190,3 +205,12 @@ RBF seems to be the best choice for all of the databases to me. The shape of the
 The RBF kernel took a bit under 3 minutes to handle all 4 datasets, which was refreshing after the experience with the polynomial kernel. I would consider using this in a real life application right after the linear kernel, as it's a quick and strong classifier.
 
 
+
+6.
+
+
+Extra
+-- Comparison of SVM vs k-NN --
+k-NN seems to have the most similarity to SVM when the RBF kernel is applied. This is mainly true for the two spirals, and cluster in cluster. If the polynomial kernel finished running when cross validation was applied, I can predict that it would have a similar shape as the k-NN decision boundary, albeit smoother.
+
+It seems that the SVM-R classifier is stronger than the k-NN approach. They had the same perfect score for cluster in cluster and half kernel, but SVM-R beats out k-NN for two gaussian and two spirals (Gaussian_k-NN: 96% vs Gaussian_SVM-R 100%, and TwoSpirals_k-NN: 92% vs TwoSpirals_SVM-R: 97%). That being said, my cross validation in assignment 1 was pretty broken, so this might have had an impact on scores and such.

@@ -14,11 +14,21 @@ def main():
     print("1. Linear")
     print("2. Polynomial")
     print("3. RBF")
+    print("4. Calculate ROC curve")
     kernelDecision = input("What kind of SVM kernel do you want to try? ")
 
     # Parsing decision
     if kernelDecision == "0":
         quit(0)
+    elif kernelDecision == "4":
+        svm.calculateROC()
+        # Printing time analytics
+        endTime = datetime.datetime.now()
+        diffTime = endTime - startTime
+        print("Start time: {}".format(startTime))
+        print("End time: {}".format(endTime))
+        print("Total elapsed time: {}".format(diffTime))
+        return
     elif kernelDecision not in ["1", "2", "3"]:
         print("Not a valid input. Exiting...")
         quit(0)

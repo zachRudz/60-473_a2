@@ -3,7 +3,7 @@ a. The SVM tool used was scikit, a python library used for simple, painless mach
 I used it to create models for our SVMs (using all 3 kernels), to perform 10-fold cross validation, and to report the related metrics of classifier strength.
 
 b. Please see the below pages; Included are the results from each step of the assignment as they were completed.
-c.
+
 
 
 2.
@@ -195,7 +195,9 @@ It seems that the linear kernel is more or less only good for linearly separable
 In my opinion, I would only use the linear kernel when first testing out the dataset (to see if it can be cleanly linearly seperable), or if I wanted an SVM classifier very quickly. The linear kernel took a total of 48 seconds to classify and plot all 4 datasets, which is a lot quicker than the other two kernels. It's quick and easy, but not quite a good fit for the use cases presented to us in these 4 datasets.
 
 -- Polynomial kernel (no CV) --
-In contrast, the polynomial kernel had better, but still not stunning results. It was able to handle the two gaussians dataset a bit better than the linear kernel, but the rest of the datasets weren't anything to write home about. I was expecting the polynomial kernel to be able to properly classify all of the points in the half-kernel dataset since it's visually seperable by a quadratic line, however it came out with a strange pattern. I'm sure that this would have been resolved if I were able to wait long enough for polynomial kernel with 10-fold cross validation to work on this dataset. Regardless of time spent building the model, this classifier would be better suited for the half kernel dataset since it's quadratically (?) sepearable. The other datasets would not perform well with this classifier, since they don't seem to cleanly separate in into side A vs side B.
+In contrast, the polynomial kernel had better, but still not stunning results. It was able to handle the two gaussians dataset a bit better than the linear kernel, but the rest of the datasets weren't anything to write home about. I was expecting the polynomial kernel to be able to properly classify all of the points in the half-kernel dataset since it's visually seperable by a quadratic line, however it came out with a strange pattern. I'm sure that this would have been resolved if I were able to wait long enough for polynomial kernel with 10-fold cross validation to work on this dataset.
+
+Regardless of time spent building the model, this classifier would be better suited for the half kernel dataset since it's quadratically (?) sepearable. The other datasets would not perform well with this classifier, since they don't seem to cleanly separate in into side A vs side B.
 
 In other news, I've been running the classifier with a polynomial kernel and 10-fold cross validation for about an hour, and I still don't have results for the half kernel dataset. I can only assume that the other datasets would take this long as well, which doesn't look promising to me. In all of the cases I ran the polynomial kernel classifier, the RBF classifier outperformed it. I would consider using the polynomial kernel if someone showed me that it was worth the time, but otherwise I think the time spent waiting for computation could be put to better use elsewhere.
 
@@ -205,12 +207,34 @@ RBF seems to be the best choice for all of the databases to me. The shape of the
 The RBF kernel took a bit under 3 minutes to handle all 4 datasets, which was refreshing after the experience with the polynomial kernel. I would consider using this in a real life application right after the linear kernel, as it's a quick and strong classifier.
 
 
+5.
+I wasn't certain about what parameters I should be testing out for this one, so I stuck with showing the ROC curve for the 10 different K-folds in cross validation, like in the example I went off of to build the ROC curve. From taking a look at the documentation for SVM (http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html), it seems that the and class weight and gamma value are the only related parameter.
 
 6.
+Overall, the SVM classifiers worked fairly well. I didn't expect the linear kernel to perform, but it did build quickly. The polynomial kernel was dissapointingly slow when cross validation was used, and the performance was pretty bad. The RBF kernel however, worked very well. With scores either at 100% or at 97%, this classifier was able to handle whatever dataset I threw at it.
 
 
 Extra
 -- Comparison of SVM vs k-NN --
+
+The scores of k-NN are below, for reference. As an aside, my cross validation was broken in assignment 1 because I didn't shuffle the dataset. This is why there are errors showing that there only one class in the test set. This has been fixed in the current assignment
+
+-- K-nearest Neighbors, cross validation --
+Dataset: datasets/clusterincluster.csv  Score: 1.0
+    Test set contains one class only. There is no false positive or false negative; Only the one class.
+Dataset: datasets/halfkernel.csv    Score: 1.0
+    Test set contains one class only. There is no false positive or false negative; Only the one class.
+Dataset: datasets/twogaussians.csv  Score: 1.0
+    tn: 6  fp: 0  fn: 0  tp: 34
+    specificity: 1.0
+    sensitivity: 1.0
+    ppv: 1.0
+    npv: 1.0
+Dattaset: datasets/twospirals.csv   Score: 0.95
+    Test set contains one class only. There is no false positive or false negative; Only the one class.
+
+
 k-NN seems to have the most similarity to SVM when the RBF kernel is applied. This is mainly true for the two spirals, and cluster in cluster. If the polynomial kernel finished running when cross validation was applied, I can predict that it would have a similar shape as the k-NN decision boundary, albeit smoother.
 
 It seems that the SVM-R classifier is stronger than the k-NN approach. They had the same perfect score for cluster in cluster and half kernel, but SVM-R beats out k-NN for two gaussian and two spirals (Gaussian_k-NN: 96% vs Gaussian_SVM-R 100%, and TwoSpirals_k-NN: 92% vs TwoSpirals_SVM-R: 97%). That being said, my cross validation in assignment 1 was pretty broken, so this might have had an impact on scores and such.
+

@@ -2,11 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94f8db9e-860d-4b74-b223-f8b502b5b391" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/3b_polynomialKernel_twoGaussians.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/3b_polynomialKernel_twoSpirals.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/a2.odt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/2a_linear_clusterInCluster.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/2a_linear_halfKernel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/2a_linear_twoGaussians.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/2a_linear_twoSpirals.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/2c_rbf_clusterInCluster.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/2c_rbf_halfKernel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/2c_rbf_twoGaussians.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/2c_rbf_twoSpirals.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/5_rocCurves.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plots/extra_a1_kNN.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rudzinsz_a2.pdf" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/a1.odt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plots/2b_linear_clusterInCluster.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plots/2b_linear_halfKernel.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plots/2b_linear_twoGaussians.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plots/2b_linear_twoSpirals.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plots/2b_rbf_clusterInCluster.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plots/2b_rbf_halfKernel.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plots/2b_rbf_twoGaussians.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plots/2b_rbf_twoSpirals.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rudzinsz_a1.pdf" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/a1.txt" afterPath="$PROJECT_DIR$/a1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm.py" afterPath="$PROJECT_DIR$/svm.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +50,8 @@
       <file leaf-file-name="a1.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a1.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="193" column="0" lean-forward="true" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
+            <state relative-caret-position="85">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -41,8 +60,8 @@
       <file leaf-file-name="svm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/svm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+            <state relative-caret-position="680">
+              <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding>
                 <element signature="e#29#40#0" expanded="true" />
               </folding>
@@ -85,7 +104,7 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="187">
               <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
@@ -153,8 +172,8 @@
         <option value="$PROJECT_DIR$/naiveBayes.py" />
         <option value="$PROJECT_DIR$/classifier.py" />
         <option value="$PROJECT_DIR$/a1_progress.txt" />
-        <option value="$PROJECT_DIR$/a1.txt" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/a1.txt" />
         <option value="$PROJECT_DIR$/svm.py" />
       </list>
     </option>
@@ -427,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509572401858</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="ROC curve + AUC works now. &#10;&#10;Next steps: Modify ROC to plot different AUC for each SVM parameters instead of AUC for each fold in CV.">
+      <created>1509680297887</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1509680297887</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -469,7 +495,8 @@
     <MESSAGE value="Implimented SVM.&#10;&#10;Next Steps: Impliment cross validation properly" />
     <MESSAGE value="+ Deleted some old files" />
     <MESSAGE value="Fixed CV, finished questions 3 and 4." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed CV, finished questions 3 and 4." />
+    <MESSAGE value="ROC curve + AUC works now. &#10;&#10;Next steps: Modify ROC to plot different AUC for each SVM parameters instead of AUC for each fold in CV." />
+    <option name="LAST_COMMIT_MESSAGE" value="ROC curve + AUC works now. &#10;&#10;Next steps: Modify ROC to plot different AUC for each SVM parameters instead of AUC for each fold in CV." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -729,14 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="193" column="0" lean-forward="true" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datasets/clusterincluster.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16592">
@@ -745,9 +764,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/a1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="187">
           <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
@@ -757,8 +784,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/svm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+        <state relative-caret-position="680">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding>
             <element signature="e#29#40#0" expanded="true" />
           </folding>

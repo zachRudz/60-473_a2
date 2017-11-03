@@ -54,7 +54,11 @@ def classify(kernel, cross_validation=False):
         y = dataset.loc[:, 2]
 
         # Creating our classifier
-        clf = svm.SVC(kernel=kernel, gamma=2)
+        if cross_validation and kernel=="poly":
+            # As mentioned in question 3, we should run the SVM classifier with default parameters.
+            clf = svm.SVC(kernel=kernel)
+        else:
+            clf = svm.SVC(kernel=kernel, gamma=2)
 
         # When building our model, should we use cross validation, or just split the data?
         if cross_validation:
@@ -147,8 +151,6 @@ def classify(kernel, cross_validation=False):
 # Reference: https://matplotlib.org/users/pyplot_tutorial.html
 # Reference: http://scikit-learn.org/stable/auto_examples/model_selection/plot_roc_crossval.html
 def calculateROC(kernel="rbf"):
-
-    gamma = ['auto', '1', '2', '3', '4']
     dsNum = 0
     for ds_file in dataset_files:
         plt.figure(dsNum + 1)

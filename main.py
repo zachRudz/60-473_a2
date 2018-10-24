@@ -1,5 +1,3 @@
-import naiveBayes
-import kNearestNeighbors
 import svm
 import datetime
 
